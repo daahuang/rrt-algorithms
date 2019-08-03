@@ -4,7 +4,8 @@
 from src.utilities.geometry import dist_between_points
 
 
-def cost_to_go(a: tuple, b: tuple) -> float:
+# def cost_to_go(a: tuple, b: tuple) -> float:
+def cost_to_go(a, b):
     """
     :param a: current location
     :param b: next location

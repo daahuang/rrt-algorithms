@@ -3,6 +3,7 @@
 
 import plotly as py
 from plotly import graph_objs as go
+import os
 
 colors = ['darkblue', 'teal']
 
@@ -13,7 +14,16 @@ class Plot(object):
         Create a plot
         :param filename: filename
         """
-        self.filename = "../../output/visualizations/" + filename + ".html"
+        # self.filename = "../../output/visualizations/" + filename + ".html"
+        out_dir = os.path.dirname(os.path.realpath(__file__))
+        out_dir = os.path.dirname(out_dir)
+        out_dir = os.path.dirname(out_dir)
+        out_dir = os.path.join(out_dir, 'outputs', 'visualizations')
+
+        if not os.path.exists(out_dir):
+            os.makedirs(out_dir)
+
+        self.filename = os.path.join(out_dir, filename + '.html')
         self.data = []
         self.layout = {'title': 'Plot',
                        'showlegend': False
