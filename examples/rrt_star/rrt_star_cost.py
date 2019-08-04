@@ -26,7 +26,7 @@ X = SearchSpace(X_dimensions, Obstacles)
 def get_goal_cost(x_goal):
     def goal_cost_func(x):
         dist = np.linalg.norm(np.array(x) - np.array(x_goal))
-        sat = dist < 10.0
+        sat = dist < 5.0
         return dist, sat
     return goal_cost_func
 
@@ -37,9 +37,13 @@ rrt = RRTStarCost(X, Q, x_init, goal_cost, max_samples, r, prc=prc, rewire_count
 out = rrt.rrt_star_cost()
 if out is not None:
     cost, path = out
+else:
+    path = None
 
 plot = Plot("rrt_star_3d")
 plot.plot_tree(X, rrt.trees)
+if path is not None:
+    plot.plot_path(X, path)
 plot.plot_obstacles(X, Obstacles)
 plot.plot_start(X, x_init)
 plot.plot_goal(X, x_goal)
