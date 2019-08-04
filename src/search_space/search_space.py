@@ -75,3 +75,23 @@ class SearchSpace(object):
         """
         x = np.random.uniform(self.dimension_lengths[:, 0], self.dimension_lengths[:, 1])
         return tuple(x)
+
+    def sample_point_free(self, point, d, trials=10):
+        for _i in range(trials):
+            x = self.sample_point(point, d)
+            if self.obstacle_free(x):
+                return x
+
+        # if center too close to obstacles
+        return self.sample_free()
+
+    def sample_point(self, point, d):
+        point = np.array(point)
+        lower_bnd = point - d
+        upper_bnd = point + d
+
+        lower_bnd = np.fmax(lower_bnd, self.dimension_lengths[:, 0])
+        upper_bnd = np.fmin(upper_bnd, self.dimension_lengths[:, 1])
+
+        x = np.random.uniform(lower_bnd, upper_bnd)
+        return tuple(x)
