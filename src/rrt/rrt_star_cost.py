@@ -1,9 +1,9 @@
-from src.rrt.rrt_star import RRTStar
-from src.rrt.heuristics import path_cost
+from .rrt_star import RRTStar
+from .heuristics import path_cost
 import heapq
 import random
 import numpy as np
-from src.utilities.geometry import steer
+from ..utilities.geometry import steer
 
 class RRTStarCost(RRTStar):
     def __init__(self, X, Q, x_init, goal_cost, max_samples, r, prc=0.01, rewire_count=None):
