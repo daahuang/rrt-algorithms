@@ -61,13 +61,15 @@ class RRTStarCost(RRTStar):
 
                     # when budget, return best
                     if self.samples_taken >= self.max_samples:
-                        sat_cost, cost_g, cost_p, x_best = heapq.heappop(self.cost_heap)
 
-                        if sat_cost == 0:
-                            # reach goal
-                            return cost_p, self.reconstruct_path(0, self.x_init, x_best)
-                        else:
-                            return None
+                        if len(self.cost_heap) > 0:
+                            sat_cost, cost_g, cost_p, x_best = heapq.heappop(self.cost_heap)
+
+                            if sat_cost == 0:
+                                # reach goal
+                                return cost_p, self.reconstruct_path(0, self.x_init, x_best)
+
+                        return None
 
     def connect_shortest_valid(self, tree, x_new, L_near):
         # check nearby vertices for total cost and connect shortest valid edge
