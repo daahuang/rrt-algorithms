@@ -64,7 +64,7 @@ class RRTStarCost(RRTStar):
 
                         if len(self.cost_heap) > 0:
                             sat_cost, cost_g, cost_p, x_best = heapq.heappop(self.cost_heap)
-
+                            print("goal_cost {}".format(cost_g))
                             if sat_cost == 0:
                                 # reach goal
                                 return cost_p, self.reconstruct_path(0, self.x_init, x_best)
